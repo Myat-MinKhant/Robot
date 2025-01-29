@@ -1,0 +1,19 @@
+red,Red,#FF0000,255,0,0
+green,Green,#00FF00,0,255,0
+blue,Blue,#0000FF,0,0,255
+yellow,Yellow,#FFFF00,255,255,0
+cyan,Cyan,#00FFFF,0,255,255
+magenta,Magenta,#FF00FF,255,0,255
+white,White,#FFFFFF,255,255,255
+black,Black,#000000,0,0,0
+gray,Gray,#808080,128,128,128
+dark_red,Dark Red,#8B0000,139,0,0
+light_green,Light Green,#90EE90,144,238,144
+light_blue,Light Blue,#ADD8E6,173,216,230
+orange,Orange,#FFA500,255,165,0
+pink,Pink,#FFC0CB,255,192,203
+brown,Brown,#A52A2A,165,42,42
+purple,Purple,#800080,128,0,128
+beige,Beige,#F5F5DC,245,245,220
+light_gray,Light Gray,#D3D3D3,211,211,211
+dark_gray,Dark Gray,#A9A9A9,169,169,169
