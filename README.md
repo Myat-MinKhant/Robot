@@ -1,7 +1,3 @@
-Sure! Here's a **README.md** file for your chatbot project:  
-
----
-
 # **AI Chatbot with Voice (Gemini)**  
 
 This is an **AI-powered chatbot** that utilizes **Google's Gemini API** to generate responses based on a given document. It features:  
