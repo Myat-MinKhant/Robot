@@ -2,10 +2,12 @@ from modules.global_vars import GLOBALS
 from modules.hand_tracking import HandTracking
 from modules.face_recognition import FaceRecognition
 from modules.object_detection import object_detection
+from modules.face_landmarks import FaceMeshDetector
 from modules.talk import talk
 import time
 
 # Initialize face recognition
+detector = FaceMeshDetector()
 face_recog = FaceRecognition()
 face_recog.encode_faces() 
 timer = None
@@ -70,6 +72,7 @@ def process_frame(frame):
 
     elif GLOBALS["current_task"] == 'face_recognition':
         frame = face_recog.run_recognition(frame)
+        frame = detector.find_face_mesh(frame)
         if not any([GLOBALS["current_face"], GLOBALS["task_completed"]]):
             GLOBALS["current_task"] = GLOBALS["previous_task"]
         else:

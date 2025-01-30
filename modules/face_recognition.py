@@ -54,7 +54,7 @@ class FaceRecognition:
             right *= 4
             bottom *= 4
             left *= 4
-            cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
+            # cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
             cv2.putText(frame, name, (left, top - 10), cv2.FONT_HERSHEY_DUPLEX, 0.8, (0, 255, 0), 1)
 
         GLOBALS["task_completed"] = True

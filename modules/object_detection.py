@@ -8,7 +8,7 @@ from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 
 # Load the label map and model
-PATH_TO_LABELS = '/home/pi/Desktop/Robot/models/labels/research/object_detection/data/mscoco_label_map.pbtxt'
+PATH_TO_LABELS = '/home/pi/Desktop/labels/research/object_detection/data/mscoco_label_map.pbtxt'
 category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
 PATH_TO_CKPT = '/home/pi/Desktop/Robot/models/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/saved_model'
 detect_fn = tf.saved_model.load(PATH_TO_CKPT)

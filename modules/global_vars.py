@@ -29,4 +29,5 @@ GLOBALS = {
         ),
     },
     "CONVERSATIONS_FOLDER": "resources/conversations",
+    "preferred_genres": ["action", "comedy", "drama", "horror", "sci-fi"],
 }
