@@ -1,3 +1,5 @@
+##This version use Hardcore text reply but works
+
 import speech_recognition as sr
 from gtts import gTTS
 from pygame import mixer
