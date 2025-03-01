@@ -3,7 +3,7 @@ from openai import OpenAI
 # Initialize OpenAI client
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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",
+    api_key="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",
 )
 
 # Chat history to maintain context
