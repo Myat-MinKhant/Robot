@@ -9,6 +9,7 @@ from modules.face_recognition import FaceRecognition
 camera = Picamera2()
 camera.preview_configuration.main.size = (640, 480)
 camera.start()  
+camera.set_controls({"AfMode": 2})  # 1 = Continuous, 2 = Auto (single focus)
 
 def open_camera():
     global camera
@@ -16,7 +17,8 @@ def open_camera():
     while GLOBALS['streaming']:
         frame = camera.capture_array()
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-        frame = cv2.flip(frame, 1)
+        # frame = cv2.flip(frame, 1)
+        frame = cv2.flip(frame, 0)
         frame = process_frame(frame)
         
         cv2.imshow('Frame', frame)

@@ -1,5 +1,9 @@
 import cv2
 import mediapipe as mp
+from modules.global_vars import GLOBALS,  stop_random_movement
+from hardware.head_servo import generate_face_tracking
+from hardware.random_head_servo import random_movement
+from hardware.eyelids_servo import blink_eyes
 
 class FaceMeshDetector:
     def __init__(self, max_faces=1, min_detection_confidence=0.5, min_tracking_confidence=0.5):
@@ -71,15 +75,28 @@ class FaceMeshDetector:
 
         return connections
 
-    def find_face_mesh(self, frame):
+    def find_face_mesh_and_tracking(self, frame):
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = self.face_mesh.process(frame_rgb)
+
         if results.multi_face_landmarks:
+            GLOBALS['face_detected'] = True
+            GLOBALS['lost_face_counter'] = 0
+            stop_random_movement.set()  # Stop random movement when face is detected
+
             for face_landmarks in results.multi_face_landmarks:
+                # generate_face_tracking(face_landmarks)
                 self.mp_drawing.draw_landmarks(
                     image=frame,
                     landmark_list=face_landmarks,
                     connections=self.connections,
                     landmark_drawing_spec=self.drawing_spec,
-                    connection_drawing_spec=self.drawing_spec)
+                    connection_drawing_spec=self.drawing_spec
+                )
+        else:
+            GLOBALS['lost_face_counter'] += 1
+            if GLOBALS['lost_face_counter'] > 10:
+                GLOBALS['face_detected'] = False
+                stop_random_movement.clear()  # Resume random movement if face is lost
+
         return frame

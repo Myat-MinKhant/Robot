@@ -1,6 +1,7 @@
 import os
 import time
 from modules.global_vars import GLOBALS
+# from utilities.languages_translation import file_translation
 
 def setup_directories():
     os.makedirs(GLOBALS["CONVERSATIONS_FOLDER"], exist_ok=True)
@@ -10,38 +11,29 @@ def save_conversation(username, conversation):
         setup_directories()
         filename = os.path.join(GLOBALS["CONVERSATIONS_FOLDER"], f"{username}.txt")
 
-        if os.path.exists(filename):
-            with open(filename, 'w') as file:
-                file.write(f"{GLOBALS['system_persona']['role']}: {GLOBALS['system_persona']['content']}\n")
-                user_input_found = False
-                for line in conversation:
-                    cleaned_line = line.strip()
-                    if f"{username}:" in cleaned_line:
-                        user_input_found = True
-                    if user_input_found:
-                        file.write(f"{cleaned_line}\n")
+        # Using write ('w') mode as in your original code.
+        # (If you prefer to append to an existing conversation, use mode 'a' instead.)
+        with open(filename, 'w', encoding='utf-8') as file:
+            # Write the system persona header
+            file.write(f"role: {GLOBALS['system_persona']['role']}, content: {GLOBALS['system_persona']['content']}\n")
+            user_input_found = False
+            for line in conversation:
+                cleaned_line = line.strip()
+                # Change the condition to trigger if the line exactly equals the username (ignoring case)
+                # or if it contains "username:".
+                if cleaned_line.lower() == username.lower() or f"{username}:" in cleaned_line:
+                    user_input_found = True
+                if user_input_found:
+                    file.write(f"{cleaned_line}\n")
                         
-            print(f"Conversation with {username} appended.")    
-        else:
-            # Create a new file for the current user
-            with open(filename, 'w') as file:
-                user_input_found = False
-                file.write(f"{GLOBALS['system_persona']['role']}: {GLOBALS['system_persona']['content']}\n")
-                for line in conversation:
-                    cleaned_line = line.strip()
-                    if f"{username}:" in cleaned_line:
-                        user_input_found = True
-                    if user_input_found:
-                        file.write(f"{cleaned_line}\n")  
-            print(f"Conversation with {username} saved.")
+        print(f"Conversation with {username} saved.")    
     else:
         pass
 
-    
 def load_conversation(username):
     filename = os.path.join(GLOBALS["CONVERSATIONS_FOLDER"], f"{username}.txt")
     if os.path.exists(filename):
-        with open(filename, 'r') as file:
+        with open(filename, 'r', encoding='utf-8') as file:
             return file.readlines()
     else:
         return []

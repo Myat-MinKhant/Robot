@@ -12,12 +12,15 @@ def handle_user_input(user_input, current_conversation, current_user_name):
     # Fetch response from OpenAI API
     response = get_openai_response("\n".join(current_conversation))
 
-    if response["choices"][0]["text"].strip() == "":
-        handle_empty_response(GLOBALS['empty_response_count'])
+    # if response["choices"][0]["text"].strip() == "":
+    if response == "":
+        handle_empty_response()
     else:
         GLOBALS['empty_response_count'] = 0
 
-    response_string = preprocess_response(response["choices"][0]["text"])
+    response_string = preprocess_response(response)
+    # response_string = preprocess_response(response)
+
     current_conversation.append(f"{GLOBALS['bot_name']}: {response_string}")
 
     if current_user_name != "Guest":

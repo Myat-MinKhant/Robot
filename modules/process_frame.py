@@ -34,7 +34,7 @@ def process_frame(frame):
                     talk(f"I don't have color information for {GLOBALS['user_requested_object']}.")
                     GLOBALS["user_requested_object"] = None
             else:
-                talk(f"I see {GLOBALS['object_colors']} {GLOBALS['current_object_detection']}.")
+                talk(f"I predict it is {GLOBALS['object_colors']} {GLOBALS['current_object_detection']}.")
                 GLOBALS["object_colors"] = None
                 GLOBALS["current_object_detection"] = None
                 
@@ -58,7 +58,7 @@ def process_frame(frame):
                 talk(f"I do not see {GLOBALS['user_requested_object']}. My camera detect {GLOBALS['current_object_detection']}.")
                 GLOBALS["user_requested_object"] = None
             else:
-                talk(f"I see {GLOBALS['current_object_detection']}")
+                talk(f"I think it is the {GLOBALS['current_object_detection']}")
                 GLOBALS["current_object_detection"] = None
                 GLOBALS["task_completed"] = False  # Reset task_completed after printing
 
@@ -72,7 +72,7 @@ def process_frame(frame):
 
     elif GLOBALS["current_task"] == 'face_recognition':
         frame = face_recog.run_recognition(frame)
-        frame = detector.find_face_mesh(frame)
+        frame = detector.find_face_mesh_and_tracking(frame)
         if not any([GLOBALS["current_face"], GLOBALS["task_completed"]]):
             GLOBALS["current_task"] = GLOBALS["previous_task"]
         else:
