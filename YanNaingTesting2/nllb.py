@@ -1,7 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 
-text = "It is important for Burmese Buddhists to know on which day of the week they were born."
-
+text = input("Add your question and i will give you my answer!")
 checkpoint = "facebook/nllb-200-distilled-600M"
 # # checkpoint = "facebook/nllb-200–1.3B"
 # # checkpoint = "facebook/nllb-200–3.3B"
